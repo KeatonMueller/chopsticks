@@ -22,3 +22,6 @@ HumanPlayer.o: Players/HumanPlayer.cpp $(HEADER)
 
 Util.o: Util/Util.cpp $(HEADER)
 	$(CC) $(CFLAGS) $< -o $@
+
+clean:
+	rm *.o chopsticks
