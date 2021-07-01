@@ -88,7 +88,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>Util;Game;Players;$(SolutionDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Util;Game;Players;$(SolutionDir);Headers</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -103,7 +103,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>Util;Game;Players;$(SolutionDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Util;Game;Players;$(SolutionDir);Headers</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -118,7 +118,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>Util;Game;Players;$(SolutionDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Util;Game;Players;$(SolutionDir);Headers</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -133,7 +133,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>Util;Game;Players;$(SolutionDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Util;Game;Players;$(SolutionDir);Headers</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -144,22 +144,23 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include=".gitignore" />
+    <None Include="Makefile" />
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game\Game.cpp" />
     <ClCompile Include="Game\GameState.cpp" />
+    <ClCompile Include="Main.cpp" />
     <ClCompile Include="Players\HumanPlayer.cpp" />
-    <ClCompile Include="Players\Player.h" />
-    <ClCompile Include="Util\Main.cpp" />
     <ClCompile Include="Util\Util.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game\Game.h" />
-    <ClInclude Include="Game\GameState.h" />
-    <ClInclude Include="Game\Move.h" />
-    <ClInclude Include="Players\HumanPlayer.h" />
-    <ClInclude Include="Util\Util.h" />
+    <ClInclude Include="Headers\Game.h" />
+    <ClInclude Include="Headers\GameState.h" />
+    <ClInclude Include="Headers\HumanPlayer.h" />
+    <ClInclude Include="Headers\Move.h" />
+    <ClInclude Include="Headers\Player.h" />
+    <ClInclude Include="Headers\Util.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

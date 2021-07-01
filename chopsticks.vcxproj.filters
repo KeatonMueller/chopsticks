@@ -17,12 +17,10 @@
   <ItemGroup>
     <None Include="README.md" />
     <None Include=".gitignore" />
+    <None Include="Makefile" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game\Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Players\Player.h">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Players\HumanPlayer.cpp">
@@ -34,24 +32,27 @@
     <ClCompile Include="Util\Util.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Util\Main.cpp">
+    <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game\Game.h">
+    <ClInclude Include="Headers\Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Players\HumanPlayer.h">
+    <ClInclude Include="Headers\GameState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Game\GameState.h">
+    <ClInclude Include="Headers\HumanPlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Move.h">
+    <ClInclude Include="Headers\Move.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Util\Util.h">
+    <ClInclude Include="Headers\Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\Util.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
