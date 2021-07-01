@@ -14,8 +14,6 @@ private:
 	uint8_t _player;
 
 	uint8_t _getInput(const std::string& prompt, uint8_t min, uint8_t max);
-
-	bool _canRedistribute(GameState gameState, uint8_t newLeft);
 };
 
 #endif

@@ -33,13 +33,6 @@ uint8_t HumanPlayer::_getInput(const std::string& prompt, uint8_t min, uint8_t m
 	}
 }
 
-bool HumanPlayer::_canRedistribute(GameState gameState, uint8_t newLeft)
-{
-	// you can redistribute as long as you pick a new value
-	return (newLeft != gameState.getHand(_player, 0))
-		&& (newLeft != gameState.getHand(_player, 1));
-}
-
 Move HumanPlayer::getMove(GameState& gameState)
 {
 	Move move = { _player, (TYPE)0, 0, 0 };
@@ -71,12 +64,11 @@ Move HumanPlayer::getMove(GameState& gameState)
 	{
 		move.type = TYPE::REDISTRIBUTE;
 
-		int handsSum = gameState.getHand(_player, 0) + gameState.getHand(_player, 1);
 		input = gameState.getHand(_player, 0);
-		while (!_canRedistribute(gameState, input))
-			input = _getInput("Enter new value for left hand: ", 0, std::min(handsSum, 4));
+		while (!gameState.canRedistribute(_player, input))
+			input = _getInput("Enter new value for left hand: ", 0, 4);
 
-		uint8_t newRight = handsSum - input;
+		uint8_t newRight = gameState.getHand(_player, 0) + gameState.getHand(_player, 1) - input;
 		move.hand0 = newRight;
 		move.hand1 = input;
 	}

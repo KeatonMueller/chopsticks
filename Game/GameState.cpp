@@ -1,29 +1,84 @@
+#include <algorithm>
+
 #include "GameState.h"
 
 GameState::GameState()
+	: _handMasks{ 0x0f, 0xf0 }
 {
 	// initialize _handAmounts
 	for (uint8_t hand = 0; hand < 2; hand++)
 		for (uint8_t finger = 0; finger < 5; finger++)
 			_handAmounts[hand][finger] = finger << (hand * 4);
 
-	// initialize hand masks
-	_handMasks[0] = 0x0f;
-	_handMasks[1] = 0xf0;
-
 	// set both players hands to both be 1
 	_hands[0] = _handAmounts[0][1] | _handAmounts[1][1];
 	_hands[1] = _handAmounts[0][1] | _handAmounts[1][1];
 }
 
-uint8_t GameState::getHands(uint8_t player)
-{
-	return _hands[player];
-}
-
+/**
+* Get the value of the given hand for the given player.
+*/
 uint8_t GameState::getHand(uint8_t player, uint8_t hand)
 {
-	return (getHands(player) & _handMasks[hand]) >> (hand * 4);
+	return (_hands[player] & _handMasks[hand]) >> (hand * 4);
+}
+
+/**
+* Generate all legal moves for the given player
+* based on the current board state.
+*/
+std::vector<Move> GameState::getPossibleMoves(uint8_t player)
+{
+	std::vector<Move> moves;
+
+	// get player's hands
+	uint8_t hands[2] = { getHand(player, 0), getHand(player, 1) };
+
+	// generate all legal attacking moves
+	for (uint8_t myIdx = 0; myIdx < 2; myIdx++)
+	{
+		// can't attack with a hand of zero
+		if (hands[myIdx] == 0)
+			continue;
+
+		for (uint8_t oppIdx = 0; oppIdx < 2; oppIdx++)
+		{
+			// can't target a hand of zero
+			if (getHand(1 - player, oppIdx) == 0)
+				continue;
+
+			moves.push_back({ player, TYPE::ATTACK, myIdx, oppIdx });
+		}
+	}
+
+	// generate all legal redistributing moves
+	uint8_t handsSum = hands[0] + hands[1];
+	if (1 < handsSum && handsSum < 7)
+		for (uint8_t newRight = 0; newRight <= std::min((uint8_t)4, handsSum); newRight++)
+			if (newRight != hands[0] && newRight != hands[1])
+				moves.push_back({ player, TYPE::REDISTRIBUTE, newRight, (uint8_t)(handsSum - newRight) });
+
+	return moves;
+}
+
+bool GameState::canRedistribute(uint8_t player)
+{
+	uint8_t handsSum = getHand(player, 0) + getHand(player, 1);
+	// can't redistribute if finger total is 1, 7, or 8
+	return handsSum != 1 && handsSum < 7;
+}
+bool GameState::canRedistribute(uint8_t player, uint8_t newLeft)
+{
+	// you cannot pick an existing value
+	uint8_t rightHand = getHand(player, 0);
+	uint8_t leftHand = getHand(player, 1);
+	if (newLeft == rightHand || newLeft == leftHand)
+		return false;
+	// you cannot allot more fingers than your total
+	if (newLeft > rightHand + leftHand)
+		return false;
+	// redistribution is valid
+	return true;
 }
 
 /**
@@ -32,7 +87,7 @@ uint8_t GameState::getHand(uint8_t player, uint8_t hand)
 bool GameState::isGameOver()
 {
 	// game is over if either player's hands are both 0
-	return getHands(0) == 0 || getHands(1) == 0;
+	return _hands[0] == 0 || _hands[1] == 0;
 }
 
 /**

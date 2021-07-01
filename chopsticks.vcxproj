@@ -152,12 +152,14 @@
     <ClCompile Include="Game\GameState.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Players\HumanPlayer.cpp" />
+    <ClCompile Include="Players\MinimaxPlayer.cpp" />
     <ClCompile Include="Util\Util.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Headers\Game.h" />
     <ClInclude Include="Headers\GameState.h" />
     <ClInclude Include="Headers\HumanPlayer.h" />
+    <ClInclude Include="Headers\MinimaxPlayer.h" />
     <ClInclude Include="Headers\Move.h" />
     <ClInclude Include="Headers\Player.h" />
     <ClInclude Include="Headers\Util.h" />

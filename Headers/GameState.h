@@ -2,6 +2,7 @@
 #define GAME_STATE_H
 
 #include <stdint.h>
+#include <vector>
 
 #include "Move.h"
 
@@ -10,8 +11,19 @@ class GameState
 public:
 	GameState();
 
-	uint8_t getHands(uint8_t player);
+	/**
+	* Get the value of the given hand for the given player.
+	*/
 	uint8_t getHand(uint8_t player, uint8_t hand);
+
+	/**
+	* Generate all legal moves for the given player
+	* based on the current board state.
+	*/
+	std::vector<Move> getPossibleMoves(uint8_t player);
+
+	bool canRedistribute(uint8_t player);
+	bool canRedistribute(uint8_t player, uint8_t newLeftHand);
 
 	bool isGameOver();
 

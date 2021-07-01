@@ -2,18 +2,12 @@
 #include "Game.h"
 
 Game::Game(Player* p0, Player* p1)
-	: _gameState()
-{
-	// start off with it being player 0's turn
-	_turn = 0;
-	// store the player pointers
-	_players[0] = p0;
-	_players[1] = p1;
+	: _gameState(),
+	_turn(0),
+	_players{ p0, p1 }
+{}
 
-	_runGameLoop();
-}
-
-void Game::_runGameLoop()
+void Game::runGameLoop()
 {
 	Move move;
 	// until game is over
