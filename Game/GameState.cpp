@@ -3,7 +3,7 @@
 #include "GameState.h"
 
 GameState::GameState()
-	: _handMasks{ 0x0f, 0xf0 }
+	: _handMasks{0x0f, 0xf0}
 {
 	// initialize _handAmounts
 	for (uint8_t hand = 0; hand < 2; hand++)
@@ -13,6 +13,12 @@ GameState::GameState()
 	// set both players hands to both be 1
 	_hands[0] = _handAmounts[0][1] | _handAmounts[1][1];
 	_hands[1] = _handAmounts[0][1] | _handAmounts[1][1];
+}
+
+void GameState::readFrom(GameState &gameState)
+{
+	_hands[0] = gameState._hands[0];
+	_hands[1] = gameState._hands[1];
 }
 
 /**
@@ -32,7 +38,7 @@ std::vector<Move> GameState::getPossibleMoves(uint8_t player)
 	std::vector<Move> moves;
 
 	// get player's hands
-	uint8_t hands[2] = { getHand(player, 0), getHand(player, 1) };
+	uint8_t hands[2] = {getHand(player, 0), getHand(player, 1)};
 
 	// generate all legal attacking moves
 	for (uint8_t myIdx = 0; myIdx < 2; myIdx++)
@@ -47,7 +53,7 @@ std::vector<Move> GameState::getPossibleMoves(uint8_t player)
 			if (getHand(1 - player, oppIdx) == 0)
 				continue;
 
-			moves.push_back({ player, TYPE::ATTACK, myIdx, oppIdx });
+			moves.push_back({player, TYPE::ATTACK, myIdx, oppIdx});
 		}
 	}
 
@@ -56,7 +62,7 @@ std::vector<Move> GameState::getPossibleMoves(uint8_t player)
 	if (1 < handsSum && handsSum < 7)
 		for (uint8_t newRight = 0; newRight <= std::min((uint8_t)4, handsSum); newRight++)
 			if (newRight != hands[0] && newRight != hands[1])
-				moves.push_back({ player, TYPE::REDISTRIBUTE, newRight, (uint8_t)(handsSum - newRight) });
+				moves.push_back({player, TYPE::REDISTRIBUTE, newRight, (uint8_t)(handsSum - newRight)});
 
 	return moves;
 }
@@ -91,6 +97,20 @@ bool GameState::isGameOver()
 }
 
 /**
+* Get the winner (0 or 1) of the game.
+* 
+* If no winner, return 2.
+*/
+uint8_t GameState::getWinner()
+{
+	if (_hands[0] == 0)
+		return 1;
+	if (_hands[1] == 0)
+		return 0;
+	return 2;
+}
+
+/**
 * Execute the given move.
 *
 * The move is assumed to be legal.
@@ -111,7 +131,6 @@ void GameState::makeMove(Move move)
 		_setHand(move.player, 1, move.hand1);
 	}
 }
-
 
 void GameState::_setHand(uint8_t player, uint8_t hand, uint8_t amount)
 {

@@ -6,11 +6,11 @@
 #include "Util.h"
 
 HumanPlayer::HumanPlayer(uint8_t player)
+	: _player(player)
 {
-	_player = player;
 }
 
-uint8_t HumanPlayer::_getInput(const std::string& prompt, uint8_t min, uint8_t max)
+uint8_t HumanPlayer::_getInput(const std::string &prompt, uint8_t min, uint8_t max)
 {
 	std::string input;
 	uint8_t output;
@@ -33,15 +33,15 @@ uint8_t HumanPlayer::_getInput(const std::string& prompt, uint8_t min, uint8_t m
 	}
 }
 
-Move HumanPlayer::getMove(GameState& gameState)
+Move HumanPlayer::getMove(GameState &gameState)
 {
-	Move move = { _player, (TYPE)0, 0, 0 };
+	Move move = {_player, (TYPE)0, 0, 0};
 
 	std::cout << "Opponent's hands: " << (int)gameState.getHand(1 - _player, 1)
-		<< " " << (int)gameState.getHand(1 - _player, 0) << "\n\n";
+			  << " " << (int)gameState.getHand(1 - _player, 0) << "\n\n";
 
 	std::cout << "Your hands: " << (int)gameState.getHand(_player, 1)
-		<< " " << (int)gameState.getHand(_player, 0) << "\n\n";
+			  << " " << (int)gameState.getHand(_player, 0) << "\n\n";
 
 	uint8_t input = _getInput("Choose move type:\n\t[1] Attack\n\t[2] Redistribute\n", 1, 2);
 

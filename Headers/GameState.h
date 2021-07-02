@@ -26,6 +26,9 @@ public:
 	bool canRedistribute(uint8_t player, uint8_t newLeftHand);
 
 	bool isGameOver();
+	uint8_t getWinner();
+
+	void readFrom(GameState &gameState);
 
 	void makeMove(Move move);
 

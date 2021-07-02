@@ -1,11 +1,12 @@
 #include <iostream>
 #include "Game.h"
 
-Game::Game(Player* p0, Player* p1)
-	: _gameState(),
-	_turn(0),
-	_players{ p0, p1 }
-{}
+Game::Game(Player *p0, Player *p1)
+	: _turn(0),
+	  _players{p0, p1},
+	  _gameState()
+{
+}
 
 void Game::runGameLoop()
 {
