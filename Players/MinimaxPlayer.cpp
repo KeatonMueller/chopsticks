@@ -10,7 +10,6 @@ MinimaxPlayer::MinimaxPlayer(uint8_t player)
 
 Move MinimaxPlayer::getMove(GameState& gameState)
 {
-	Move move = { _player, TYPE::ATTACK, 0, 0 };
 	constexpr float max = std::numeric_limits<float>::max();
 	std::pair<Move, float> val = _minimax(gameState, 10, _player, -1 * max, max);
 	return val.first;
