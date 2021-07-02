@@ -10,13 +10,13 @@ class MinimaxPlayer : public Player
 {
 public:
 	MinimaxPlayer(uint8_t player);
-	Move getMove(GameState &gameState);
+	Move getMove(GameState& gameState);
 
 private:
 	uint8_t _player;
 	int _playerWeight[2];
-	float _heuristic(GameState &gameState, uint8_t turn);
-	std::pair<Move, float> _minimax(GameState &gameState, uint8_t depth, uint8_t turn, float alpha, float beta);
+	float _heuristic(GameState& gameState, uint8_t turn);
+	std::pair<Move, float> _minimax(GameState& gameState, uint8_t depth, uint8_t turn, float alpha, float beta);
 };
 
 #endif

@@ -12,7 +12,7 @@ bool attemptParse(std::string& input, uint8_t& output)
 	{
 		output = std::stoi(input);
 	}
-	catch (std::invalid_argument)
+	catch (std::invalid_argument const&)
 	{
 		return false;
 	}

@@ -3,7 +3,7 @@
 #include "GameState.h"
 
 GameState::GameState()
-	: _handMasks{0x0f, 0xf0}
+	: _handMasks{ 0x0f, 0xf0 }
 {
 	// initialize _handAmounts
 	for (uint8_t hand = 0; hand < 2; hand++)
@@ -15,7 +15,7 @@ GameState::GameState()
 	_hands[1] = _handAmounts[0][1] | _handAmounts[1][1];
 }
 
-void GameState::readFrom(GameState &gameState)
+void GameState::readFrom(GameState& gameState)
 {
 	_hands[0] = gameState._hands[0];
 	_hands[1] = gameState._hands[1];
@@ -38,7 +38,7 @@ std::vector<Move> GameState::getPossibleMoves(uint8_t player)
 	std::vector<Move> moves;
 
 	// get player's hands
-	uint8_t hands[2] = {getHand(player, 0), getHand(player, 1)};
+	uint8_t hands[2] = { getHand(player, 0), getHand(player, 1) };
 
 	// generate all legal attacking moves
 	for (uint8_t myIdx = 0; myIdx < 2; myIdx++)
@@ -53,16 +53,17 @@ std::vector<Move> GameState::getPossibleMoves(uint8_t player)
 			if (getHand(1 - player, oppIdx) == 0)
 				continue;
 
-			moves.push_back({player, TYPE::ATTACK, myIdx, oppIdx});
+			moves.push_back({ player, TYPE::ATTACK, myIdx, oppIdx });
 		}
 	}
 
 	// generate all legal redistributing moves
 	uint8_t handsSum = hands[0] + hands[1];
 	if (1 < handsSum && handsSum < 7)
-		for (uint8_t newRight = 0; newRight <= std::min((uint8_t)4, handsSum); newRight++)
+		// only go halfway because symmetric redistributions are functionally identical
+		for (uint8_t newRight = 0; newRight <= std::min((uint8_t)4, handsSum) / 2; newRight++)
 			if (newRight != hands[0] && newRight != hands[1])
-				moves.push_back({player, TYPE::REDISTRIBUTE, newRight, (uint8_t)(handsSum - newRight)});
+				moves.push_back({ player, TYPE::REDISTRIBUTE, newRight, (uint8_t)(handsSum - newRight) });
 
 	return moves;
 }
@@ -98,7 +99,7 @@ bool GameState::isGameOver()
 
 /**
 * Get the winner (0 or 1) of the game.
-* 
+*
 * If no winner, return 2.
 */
 uint8_t GameState::getWinner()

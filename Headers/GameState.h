@@ -28,7 +28,7 @@ public:
 	bool isGameOver();
 	uint8_t getWinner();
 
-	void readFrom(GameState &gameState);
+	void readFrom(GameState& gameState);
 
 	void makeMove(Move move);
 

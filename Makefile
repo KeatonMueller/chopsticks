@@ -1,7 +1,7 @@
-CC=g++
-OBJ=Main.o Util.o Game.o GameState.o HumanPlayer.o MinimaxPlayer.o
-HEADER=Headers/Game.h Headers/GameState.h Headers/HumanPlayer.h Headers/Move.h Headers/Player.h Headers/Util.h Headers/Move.h Headers/MinimaxPlayer.h
-CFLAGS=-std=c++14 -c -Wall -O3 -IHeaders
+CC = g++
+OBJ = Main.o Util.o Game.o GameState.o HumanPlayer.o MinimaxPlayer.o
+HEADER = Headers/Game.h Headers/GameState.h Headers/HumanPlayer.h Headers/Move.h Headers/Player.h Headers/Util.h Headers/Move.h Headers/MinimaxPlayer.h
+CFLAGS = -std=c++14 -c -Wall -O3 -IHeaders
 
 all: chopsticks
 
