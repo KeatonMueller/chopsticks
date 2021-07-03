@@ -2,7 +2,9 @@
 
 This is a basic AI to play the game chopsticks, because my friend asked me to make it.
 
-The true purpose is to try making ascii art.
+The true purpose is to try making ascii art (I think I did ok!)
+
+The program is written in C++.
 
 ## Rules
 
@@ -25,3 +27,12 @@ Basic gameplay aside, here are the rules of interest:
 This program's AI uses the basic minimax algorithm optimized with alpha beta pruning.
 
 Because of the very small branching factor in chopsticks, minimax is able to search to a significant depth.
+
+## How to Play
+
+If you're on Windows, you can run this program using Visual Studio.
+
+If you're on Mac, you can run the `chopsticks` executable found at the root level of the repository.
+
+When you start the program, you will be prompted to choose if you want each player to be a human or a computer.
+Please note that due to the simple nature of this game, two computers playing will just run in an infinite loop, with neither being victorious.
