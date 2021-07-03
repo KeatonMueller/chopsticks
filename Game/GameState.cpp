@@ -2,6 +2,12 @@
 
 #include "GameState.h"
 
+/**
+* Initialize a new game state.
+*
+* Fill in the _handAmounts array, and set
+* all hands to one finger.
+*/
 GameState::GameState()
 	: _handMasks{ 0x0f, 0xf0 }
 {
@@ -15,6 +21,9 @@ GameState::GameState()
 	_hands[1] = _handAmounts[0][1] | _handAmounts[1][1];
 }
 
+/**
+* Overwrite current hand values with those of given game state.
+*/
 void GameState::readFrom(GameState& gameState)
 {
 	_hands[0] = gameState._hands[0];
@@ -47,10 +56,18 @@ std::vector<Move> GameState::getPossibleMoves(uint8_t player)
 		if (hands[myIdx] == 0)
 			continue;
 
+		// ignore moves from duplicate hand; they're functionally identical
+		if (myIdx == 1 && hands[0] == hands[1])
+			continue;
+
 		for (uint8_t oppIdx = 0; oppIdx < 2; oppIdx++)
 		{
 			// can't target a hand of zero
 			if (getHand(1 - player, oppIdx) == 0)
+				continue;
+
+			// ignore attacks of duplicate hand; they're functionally identical
+			if (oppIdx == 1 && getHand(1 - player, 0) == getHand(1 - player, 1))
 				continue;
 
 			moves.push_back({ player, TYPE::ATTACK, myIdx, oppIdx });
@@ -68,12 +85,9 @@ std::vector<Move> GameState::getPossibleMoves(uint8_t player)
 	return moves;
 }
 
-bool GameState::canRedistribute(uint8_t player)
-{
-	uint8_t handsSum = getHand(player, 0) + getHand(player, 1);
-	// can't redistribute if finger total is 1, 7, or 8
-	return handsSum != 1 && handsSum < 7;
-}
+/**
+* Check if given player can redistribute their fingers
+*/
 bool GameState::canRedistribute(uint8_t player, uint8_t newLeft)
 {
 	// you cannot pick an existing value
@@ -100,15 +114,15 @@ bool GameState::isGameOver()
 /**
 * Get the winner (0 or 1) of the game.
 *
-* If no winner, return 2.
+* A winner is *always* assumed to exist, so a call
+* to isGameOver() should return true if this is ever
+* to be called.
 */
 uint8_t GameState::getWinner()
 {
 	if (_hands[0] == 0)
 		return 1;
-	if (_hands[1] == 0)
-		return 0;
-	return 2;
+	return 0;
 }
 
 /**
@@ -133,6 +147,9 @@ void GameState::makeMove(Move move)
 	}
 }
 
+/**
+* Update the hand value for the given player.
+*/
 void GameState::_setHand(uint8_t player, uint8_t hand, uint8_t amount)
 {
 	// empty out the old hand value

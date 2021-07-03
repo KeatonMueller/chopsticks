@@ -11,7 +11,7 @@ MinimaxPlayer::MinimaxPlayer(uint8_t player)
 Move MinimaxPlayer::getMove(GameState& gameState)
 {
 	constexpr float max = std::numeric_limits<float>::max();
-	std::pair<Move, float> val = _minimax(gameState, 10, _player, -1 * max, max);
+	std::pair<Move, float> val = _minimax(gameState, 15, _player, -1 * max, max);
 	return val.first;
 }
 
@@ -107,5 +107,11 @@ float MinimaxPlayer::_heuristic(GameState& gameState, uint8_t turn)
 			}
 		}
 	}
+	// having just one finger is a weak position
+	if (hands[0][0] + hands[0][1] == 1)
+		heuristic += -15;
+	if (hands[1][0] + hands[1][1] == 1)
+		heuristic += 15;
+
 	return heuristic;
 }

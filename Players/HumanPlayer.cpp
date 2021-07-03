@@ -37,28 +37,20 @@ Move HumanPlayer::getMove(GameState& gameState)
 {
 	Move move = { _player, (TYPE)0, 0, 0 };
 
-	std::cout << "Opponent's hands: " << (int)gameState.getHand(1 - _player, 1)
-		<< " " << (int)gameState.getHand(1 - _player, 0) << "\n\n";
-
-	std::cout << "Your hands: " << (int)gameState.getHand(_player, 1)
-		<< " " << (int)gameState.getHand(_player, 0) << "\n\n";
-
-	uint8_t input = _getInput("Choose move type:\n\t[1] Attack\n\t[2] Redistribute\n", 1, 2);
+	uint8_t input = _getInput("Do you want to [1] Attack, or [2] Redistribute? ", 1, 2);
 
 	if (input == 1)
 	{
 		move.type = TYPE::ATTACK;
-		input = _getInput("Pick your hand to attack with:\n\t[1] Left\n\t[2] Right\n", 1, 2);
-		if (input == 1)
-			move.hand0 = 1;
-		else if (input == 2)
-			move.hand0 = 0;
+		input = 3;
+		while (input == 3 || gameState.getHand(_player, input % 2) == 0)
+			input = _getInput("Attack with hand [1] or hand [2]? ", 1, 2);
+		move.hand0 = input % 2;
 
-		input = _getInput("Pick opponent's hand to attack:\n\t[1] Left\n\t[2] Right\n", 1, 2);
-		if (input == 1)
-			move.hand1 = 1;
-		else if (input == 2)
-			move.hand1 = 0;
+		input = 3;
+		while (input == 3 || gameState.getHand(1 - _player, input % 2) == 0)
+			input = _getInput("Attack opponent's hand [1] or hand [2]? ", 1, 2);
+		move.hand1 = input % 2;
 	}
 	else if (input == 2)
 	{

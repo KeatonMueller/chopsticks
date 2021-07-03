@@ -148,6 +148,7 @@
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Game\Art.cpp" />
     <ClCompile Include="Game\Game.cpp" />
     <ClCompile Include="Game\GameState.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -156,6 +157,7 @@
     <ClCompile Include="Util\Util.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Headers\Art.h" />
     <ClInclude Include="Headers\Game.h" />
     <ClInclude Include="Headers\GameState.h" />
     <ClInclude Include="Headers\HumanPlayer.h" />
@@ -163,6 +165,9 @@
     <ClInclude Include="Headers\Move.h" />
     <ClInclude Include="Headers\Player.h" />
     <ClInclude Include="Headers\Util.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="art.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

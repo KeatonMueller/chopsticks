@@ -22,19 +22,36 @@ public:
 	*/
 	std::vector<Move> getPossibleMoves(uint8_t player);
 
-	bool canRedistribute(uint8_t player);
+	/**
+	* Check if the given player can redistribute to the given amount.
+	*/
 	bool canRedistribute(uint8_t player, uint8_t newLeftHand);
 
+	/**
+	* Functions for game termination.
+	*/
 	bool isGameOver();
 	uint8_t getWinner();
 
+	/**
+	* Update current game state to reflect given one.
+	*/
 	void readFrom(GameState& gameState);
 
+	/**
+	* Execute the given move on the game state.
+	*/
 	void makeMove(Move move);
 
 private:
+	/**
+	* Hands for both players.
+	*/
 	uint8_t _hands[2];
 
+	/**
+	* Change the given player's hand's value.
+	*/
 	void _setHand(uint8_t player, uint8_t hand, uint8_t value);
 
 	/**
