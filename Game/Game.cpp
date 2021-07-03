@@ -44,7 +44,7 @@ void Game::_displayHands()
 */
 std::string Game::_interpretMove(Move& move)
 {
-	std::string str = "Player " + std::to_string((int)move.player);
+	std::string str = "Player " + std::to_string((int)move.player + 1);
 	if (move.type == TYPE::ATTACK)
 	{
 		std::string from = move.hand0 == 0 ? "2" : "1";
