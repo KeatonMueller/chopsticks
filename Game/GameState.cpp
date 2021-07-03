@@ -114,15 +114,15 @@ bool GameState::isGameOver()
 /**
 * Get the winner (0 or 1) of the game.
 *
-* A winner is *always* assumed to exist, so a call
-* to isGameOver() should return true if this is ever
-* to be called.
+* If no winner, return 2.
 */
 uint8_t GameState::getWinner()
 {
 	if (_hands[0] == 0)
 		return 1;
-	return 0;
+	if (_hands[1] == 0)
+		return 0;
+	return 2;
 }
 
 /**
