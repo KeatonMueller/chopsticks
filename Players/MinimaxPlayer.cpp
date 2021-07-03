@@ -35,7 +35,9 @@ std::pair<Move, float> MinimaxPlayer::_minimax(GameState& gameState, uint8_t dep
 			if (val.second > bestValue)
 			{
 				bestValue = val.second;
-				bestMove = move;
+				bestMove.type = move.type;
+				bestMove.hand0 = move.hand0;
+				bestMove.hand1 = move.hand1;
 			}
 
 			alpha = std::max(alpha, bestValue);
@@ -47,7 +49,7 @@ std::pair<Move, float> MinimaxPlayer::_minimax(GameState& gameState, uint8_t dep
 	else
 	{
 		float bestValue = std::numeric_limits<float>::max();
-		Move bestMove = { 0, (TYPE)0, 0, 0 };
+		Move bestMove = { 1, (TYPE)0, 0, 0 };
 		for (Move& move : gameState.getPossibleMoves(turn))
 		{
 			tempState.readFrom(gameState);
@@ -58,7 +60,9 @@ std::pair<Move, float> MinimaxPlayer::_minimax(GameState& gameState, uint8_t dep
 			if (val.second < bestValue)
 			{
 				bestValue = val.second;
-				bestMove = move;
+				bestMove.type = move.type;
+				bestMove.hand0 = move.hand0;
+				bestMove.hand1 = move.hand1;
 			}
 
 			beta = std::min(beta, bestValue);

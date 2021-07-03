@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include <stdint.h>
+#include <string>
 
 #include "Player.h"
 #include "GameState.h"

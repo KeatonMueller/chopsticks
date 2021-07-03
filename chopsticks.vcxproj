@@ -166,9 +166,6 @@
     <ClInclude Include="Headers\Player.h" />
     <ClInclude Include="Headers\Util.h" />
   </ItemGroup>
-  <ItemGroup>
-    <Text Include="art.txt" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
