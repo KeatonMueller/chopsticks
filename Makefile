@@ -1,6 +1,6 @@
 CC = g++
-OBJ = Main.o Util.o Game.o GameState.o HumanPlayer.o MinimaxPlayer.o
-HEADER = Headers/Game.h Headers/GameState.h Headers/HumanPlayer.h Headers/Move.h Headers/Player.h Headers/Util.h Headers/Move.h Headers/MinimaxPlayer.h
+OBJ = Main.o Util.o Game.o GameState.o HumanPlayer.o MinimaxPlayer.o Art.o
+HEADER = Headers/Game.h Headers/GameState.h Headers/HumanPlayer.h Headers/Move.h Headers/Player.h Headers/Util.h Headers/Move.h Headers/MinimaxPlayer.h Headers/Art.h
 CFLAGS = -std=c++14 -c -Wall -O3 -IHeaders
 
 all: chopsticks
@@ -24,6 +24,9 @@ MinimaxPlayer.o: Players/MinimaxPlayer.cpp $(HEADER)
 	$(CC) $(CFLAGS) $< -o $@
 
 Util.o: Util/Util.cpp $(HEADER)
+	$(CC) $(CFLAGS) $< -o $@
+
+Art.o: Game/Art.cpp $(HEADER)
 	$(CC) $(CFLAGS) $< -o $@
 
 clean:
