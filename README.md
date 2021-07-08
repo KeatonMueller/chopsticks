@@ -14,13 +14,13 @@ Therefore this program simply follows the rules that I grew up with.
 
 Basic gameplay aside, here are the rules of interest:
 
-- Redistributing fingers *must* yield a unique combination. In other words, 2 and 3 cannot be redistributed to 3 and 2 -- they are the same.
+- Redistributing fingers _must_ yield a unique combination. In other words, 2 and 3 cannot be redistributed to 3 and 2 -- they are the same.
 
 - You may not attack an opponent's hand that has zero fingers.
 
-- You *may* redistribute all of your fingers onto one hand. In other words, 2 and 2 *may* be redistributed to 4 and 0.
+- You _may_ redistribute all of your fingers onto one hand. In other words, 2 and 2 _may_ be redistributed to 4 and 0.
 
-- You may *not* redistribute to a total of 5, eliminating your own hand. In other words, 4 and 2 may *not* redistribute to 5 (=0) and 1.
+- You may _not_ redistribute to a total of 5, eliminating your own hand. In other words, 4 and 2 may _not_ redistribute to 5 (=0) and 1.
 
 ## How it Works
 
@@ -30,7 +30,7 @@ Because of the very small branching factor in chopsticks, minimax is able to sea
 
 ## How to Play
 
-If you're on Windows, you can run this program using Visual Studio.
+If you're on Windows, you can run the `chopsticks.exe` executable found at the root level of this repository.
 
 If you're on Mac, you can run the `chopsticks` executable found at the root level of the repository.
 
