@@ -3,6 +3,14 @@ OBJ = Main.o Util.o Game.o GameState.o HumanPlayer.o MinimaxPlayer.o Art.o
 HEADER = Headers/Game.h Headers/GameState.h Headers/HumanPlayer.h Headers/Move.h Headers/Player.h Headers/Util.h Headers/Move.h Headers/MinimaxPlayer.h Headers/Art.h
 CFLAGS = -std=c++14 -c -Wall -O3 -IHeaders
 
+ifeq ($(OS),Windows_NT)
+	RM = cmd \/C del
+	TARGET = chopsticks.exe
+else
+	RM = rm
+	TARGET = chopsticks
+endif
+
 all: chopsticks
 
 chopsticks: $(OBJ)
@@ -30,4 +38,4 @@ Art.o: Game/Art.cpp $(HEADER)
 	$(CC) $(CFLAGS) $< -o $@
 
 clean:
-	rm *.o chopsticks
+	$(RM) *.o $(TARGET)
